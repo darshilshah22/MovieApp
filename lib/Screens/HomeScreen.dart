@@ -18,6 +18,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   ApiCalls apiCalls = ApiCalls();
   var data;
+  int _selectedIndex = 0;
 
   getMovies()async{
     data = await apiCalls.getData("https://api.themoviedb.org/3/movie/550?api_key=$movieAPIKey");
@@ -45,6 +46,94 @@ class _HomeScreenState extends State<HomeScreen> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Image.asset("assets/icons/search.png", height: 30, width: 30, color: ColorConstants.blue),
+          ),
+        ],
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _selectedIndex, //New
+        onTap: (int index){
+          setState(() {
+            _selectedIndex = index;
+          });
+        },
+        items: <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: _selectedIndex == 0 ? FittedBox(
+              child: Container(
+                padding: EdgeInsets.only(top: 6, bottom: 6, left: 12, right: 12),
+                decoration: BoxDecoration(
+                  color: Colors.grey.withOpacity(0.2),
+                  borderRadius: BorderRadius.circular(20)
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset("assets/icons/video.png", height: 20, width: 20, color: ColorConstants.blue),
+                    const SizedBox(width: 6),
+                    const Text(
+                      "Movies",
+                      style: TextStyle(
+                          color: ColorConstants.blue,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500),
+                    ),
+                  ],
+                ),
+              ),
+            ) : Image.asset("assets/icons/video.png", height: 20, width: 20, color: ColorConstants.blue),
+            label: '',
+          ),
+          BottomNavigationBarItem(
+            icon: _selectedIndex == 1 ? FittedBox(
+              child: Container(
+                padding: EdgeInsets.only(top: 6, bottom: 6, left: 12, right: 12),
+                decoration: BoxDecoration(
+                  color: Colors.grey.withOpacity(0.2),
+                  borderRadius: BorderRadius.circular(20)
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset("assets/icons/video.png", height: 20, width: 20, color: ColorConstants.blue),
+                    SizedBox(width: 6),
+                    const Text(
+                      "Movies",
+                      style: TextStyle(
+                          color: ColorConstants.blue,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500),
+                    ),
+                  ],
+                ),
+              ),
+            ) : Image.asset("assets/icons/video.png", height: 20, width: 20, color: ColorConstants.blue),
+            label: '',
+          ),
+          BottomNavigationBarItem(
+            icon: _selectedIndex == 2 ? FittedBox(
+              child: Container(
+                padding: EdgeInsets.only(top: 6, bottom: 6, left: 12, right: 12),
+                decoration: BoxDecoration(
+                  color: Colors.grey.withOpacity(0.2),
+                  borderRadius: BorderRadius.circular(20)
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset("assets/icons/user.png", height: 20, width: 20, color: ColorConstants.blue),
+                    SizedBox(width: 6),
+                    const Text(
+                      "Profile",
+                      style: TextStyle(
+                          color: ColorConstants.blue,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500),
+                    ),
+                  ],
+                ),
+              ),
+            ) : Image.asset("assets/icons/user.png", height: 20, width: 20, color: ColorConstants.blue),
+            label: '',
           ),
         ],
       ),
